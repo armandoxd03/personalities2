@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { animeList } from './data.js';
+import { animeList } from './data.tsx';
 
 export default function Gallery() {
   const [index, setIndex] = useState(0);
@@ -32,7 +32,7 @@ export default function Gallery() {
     <>
     <h1>John Roy C. Ducut</h1>
     <h3>
-        ({index + 1} of {animeList.length})
+        {index + 1} of {animeList.length}
       </h3>
       <button onClick={handleBackClick}>
         Back
