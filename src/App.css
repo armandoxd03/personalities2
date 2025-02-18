@@ -34,12 +34,13 @@ button:active {
 }
 
 img {
+  justify-content: center;
+  align-items: center;
   max-width: 250px;
-  height: 350px;
+  height: 370px;
+  border: solid white;
+  border-radius: 10px;
 
-  padding-top: 10px;
-  padding-right: 80px;
-  padding-left: 50px;
 }
 
 .anime-list-label {
@@ -61,10 +62,13 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+
 }
 
 .anime-card {
-  margin: 20px;
+  padding: 20px;
 }
 
 .anime-title {
