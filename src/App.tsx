@@ -42,14 +42,14 @@ export default function AnimeCard() {
         </IconButton>
 
         <Card sx={{ maxWidth: 345 }} className="anime-card">
-        <h1>John Roy Ducut - C-PEITEL3</h1>
-        <h2>My Anime List</h2>
+        <h2>John Roy Ducut - C-PEITEL3</h2>
+        <h3>My Anime List</h3>
         <h3>
         {index + 1} of {animeList.length}
       </h3>
+      
           <CardMedia
             component="img"
-            height="350"
             image={anime.url}
             alt={anime.alt}
             className="anime-image"
