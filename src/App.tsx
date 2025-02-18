@@ -1,108 +1,89 @@
 import { useState } from 'react';
 import { animeList } from './data.tsx';
-import './App.css'
-import {
-  Box,
-  Button,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormLabel,
-  Card,
-  CardHeader,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Avatar,
-  IconButton,
-  Typography,
-  Collapse
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import './App.css';
+import { Card, CardMedia, CardContent, CardActions, Collapse, IconButton, Typography } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
 
-export default function App() {
+export default function AnimeCard() {
   const [index, setIndex] = useState(0);
+  const [expanded, setExpanded] = useState(false);
   const hasNext = index < animeList.length - 1;
   const hasBack = index > 0;
 
-  function handleRadioChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setIndex(Number(event.target.value));
-  }
-
   function handleNextClick() {
-    setIndex((prevIndex) => (hasNext ? prevIndex + 1 : 0));
+    if (hasNext) {
+      setIndex(index + 1);
+    } else {
+      setIndex(0);
+    }
   }
 
   function handleBackClick() {
-    setIndex((prevIndex) => (hasBack ? prevIndex - 1 : animeList.length - 1));
+    if (hasBack) {
+      setIndex(index - 1);
+    } else {
+      setIndex(animeList.length - 1);
+    }
   }
 
-  return (
-    <Box sx={{ textAlign: 'center', padding: 2 }}>
-      <FormLabel component="legend">Select an Anime</FormLabel>
-      <RadioGroup row value={index} onChange={handleRadioChange}>
-        {animeList.map((anime, i) => (
-          <FormControlLabel key={i} value={i} control={<Radio />} label={anime.name} />
-        ))}
-      </RadioGroup>
-
-      <AnimeCard index={index} />
-
-      <Box sx={{ marginTop: 2 }}>
-        <Button variant="contained" onClick={handleBackClick} disabled={!hasBack} sx={{ marginRight: 1 }}>
-          Back
-        </Button>
-        <Button variant="contained" onClick={handleNextClick} disabled={!hasNext}>
-          Next
-        </Button>
-      </Box>
-    </Box>
-  );
-}
-
-const ExpandMore = styled(IconButton, {
-  shouldForwardProp: (prop) => prop !== 'expand',
-})<{ expand: boolean }>(({ theme, expand }) => ({
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-  transform: expand ? 'rotate(180deg)' : 'rotate(0deg)',
-}));
-
-function AnimeCard({ index }: { index: number }) {
-  const [expanded, setExpanded] = useState(false);
-  const anime = animeList[index];
-
-  const handleExpandClick = () => {
+  function handleExpandClick() {
     setExpanded(!expanded);
-  };
+  }
+
+  let anime = animeList[index];
 
   return (
-    <Card sx={{ maxWidth: 345, margin: 'auto', marginTop: 2 }}>
-      <CardHeader
-        title={anime.name}
-        subheader={`by ${anime.artist}`}
-      />
-      <CardMedia component="img" height="194" className='anime-image'  image={anime.url} alt={anime.alt} />
-      <CardActions disableSpacing>
+    <div className="anime-box">
+      <div className="anime-header">
+        <IconButton aria-label="back" onClick={handleBackClick}>
+          <ArrowBackIcon />
+        </IconButton>
 
-        <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
-          {expanded ? <ExpandLessOutlinedIcon /> : <ExpandMoreIcon />}
-        </ExpandMore>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography sx={{ marginBottom: 2 }}>More Info:</Typography>
-          <Typography>{anime.description}</Typography>
-        </CardContent>
-      </Collapse>
-    </Card>
+        <Card sx={{ maxWidth: 345 }} className="anime-card">
+        <h1>John Roy Ducut</h1>
+        <h2>My Anime List</h2>
+        <h3>
+        {index + 1} of {animeList.length}
+      </h3>
+          <CardMedia
+            component="img"
+            height="350"
+            image={anime.url}
+            alt={anime.alt}
+            className="anime-image"
+          />
+
+          <CardContent>
+            <Typography variant="h6" className="anime-title">{anime.name}</Typography>
+            <Typography variant="body2" color="text.secondary">by {anime.artist}</Typography>
+          </CardContent>
+
+          <CardActions className="card-actions" disableSpacing>
+            <IconButton
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+              sx={{
+                transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                transition: 'transform 0.3s ease',
+              }}
+            >
+              <ExpandMoreIcon />
+            </IconButton>
+          </CardActions>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+              <Typography>{anime.description}</Typography>
+            </CardContent>
+          </Collapse>
+        </Card>
+
+        <IconButton aria-label="next" onClick={handleNextClick}>
+          <ArrowForwardIcon />
+        </IconButton>
+      </div>
+    </div>
   );
 }
