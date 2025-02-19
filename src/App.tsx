@@ -32,9 +32,9 @@ export default function AnimeCard() {
   return (
     <div className="anime-box">
       <div className="anime-header">
-        <IconButton aria-label="back" onClick={handleBackClick}>
-          <ArrowBackIcon />
-        </IconButton>
+      <IconButton aria-label="back" onClick={handleBackClick} sx={{ color: 'white' }}>
+        <ArrowBackIcon />
+      </IconButton>
 
         <Card sx={{ maxWidth: 345 }} className="anime-card">
           <CardContent>
@@ -43,6 +43,7 @@ export default function AnimeCard() {
             </Typography>
             <Typography variant="h6" component="h3">
               My Anime List
+              John Roy Ducut - C-PEITEL3
             </Typography>
             <Typography variant="subtitle1" component="h3">
               {index + 1} of {animeList.length}
@@ -85,7 +86,7 @@ export default function AnimeCard() {
           </Collapse>
         </Card>
 
-        <IconButton aria-label="next" onClick={handleNextClick}>
+        <IconButton aria-label="next" onClick={handleNextClick} sx={{ color: 'white' }}>
           <ArrowForwardIcon />
         </IconButton>
       </div>
