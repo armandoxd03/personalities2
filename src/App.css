@@ -75,6 +75,9 @@ img {
   color: white;
   font-size: 20px;
   margin-top: 20px;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .show {
