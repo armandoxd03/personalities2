@@ -43,7 +43,6 @@ export default function AnimeCard() {
             </Typography>
             <Typography variant="h6" component="h3">
               My Anime List
-              John Roy Ducut - C-PEITEL3
             </Typography>
             <Typography variant="subtitle1" component="h3">
               {index + 1} of {animeList.length}
