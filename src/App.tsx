@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { animeList } from './data.tsx';
 import './App.css';
-import { Card, CardMedia, CardContent, CardActions, Collapse, IconButton, Typography } from '@mui/material';
+import { 
+  Card, CardMedia, CardContent, CardActions, Collapse, 
+  IconButton, Typography 
+} from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -13,19 +16,11 @@ export default function AnimeCard() {
   const hasBack = index > 0;
 
   function handleNextClick() {
-    if (hasNext) {
-      setIndex(index + 1);
-    } else {
-      setIndex(0);
-    }
+    setIndex(hasNext ? index + 1 : 0);
   }
 
   function handleBackClick() {
-    if (hasBack) {
-      setIndex(index - 1);
-    } else {
-      setIndex(animeList.length - 1);
-    }
+    setIndex(hasBack ? index - 1 : animeList.length - 1);
   }
 
   function handleExpandClick() {
@@ -42,12 +37,18 @@ export default function AnimeCard() {
         </IconButton>
 
         <Card sx={{ maxWidth: 345 }} className="anime-card">
-        <h2>John Roy Ducut - C-PEITEL3</h2>
-        <h3>My Anime List</h3>
-        <h3>
-        {index + 1} of {animeList.length}
-      </h3>
-      
+          <CardContent>
+            <Typography variant="h5" component="h2" className="anime-title">
+              John Roy Ducut - C-PEITEL3
+            </Typography>
+            <Typography variant="h6" component="h3">
+              My Anime List
+            </Typography>
+            <Typography variant="subtitle1" component="h3">
+              {index + 1} of {animeList.length}
+            </Typography>
+          </CardContent>
+
           <CardMedia
             component="img"
             image={anime.url}
@@ -56,8 +57,12 @@ export default function AnimeCard() {
           />
 
           <CardContent>
-            <Typography variant="h6" className="anime-title">{anime.name}</Typography>
-            <Typography variant="body2" color="text.secondary">by {anime.artist}</Typography>
+            <Typography variant="h6" className="anime-title">
+              {anime.name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              by {anime.artist}
+            </Typography>
           </CardContent>
 
           <CardActions className="card-actions" disableSpacing>
